@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard · SIMI ERP</title>
+    <link rel="stylesheet" href="public/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="dashboard-header">
+        <h2>📊 Panel de Control</h2>
+        <button onclick="cerrarSesion()" class="cerrar-btn">
+          🚪 Cerrar Sesión
+        </button>
+      </div>
+
+      <div id="contenido-protegido">
+        <p
+          style="
+            color: var(--color-text-secondary);
+            text-align: center;
+            padding: 1rem 0;
+          "
+        >
+          <span
+            class="loading-spinner"
+            style="
+              border-color: var(--color-primary);
+              border-top-color: transparent;
+            "
+          ></span>
+          Cargando datos...
+        </p>
+      </div>
+    </div>
+
+    <script>
+      async function cargarDatos() {
+        const token = localStorage.getItem("simi_token");
+        if (!token) {
+          window.location.href = "/";
+          return;
+        }
+
+        const contenedor = document.getElementById("contenido-protegido");
+
+        try {
+          const response = await fetch("/api/erp/datos", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            contenedor.innerHTML = `
+            <p>✅ Conexión segura (token validado)</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+          } else {
+            // Si la sesión expiró o el token es inválido
+            if (response.status === 401 || response.status === 403) {
+              alert("Sesión expirada o inválida. Serás redirigido al login.");
+              cerrarSesion();
+            } else {
+              contenedor.innerHTML = `
+              <p style="color: var(--color-danger);">⚠️ Error al cargar los datos (${response.status})</p>
+              <p style="font-size:0.9rem; color: var(--color-text-secondary);">Intenta recargar la página o contacta al administrador.</p>
+            `;
+            }
+          }
+        } catch (err) {
+          console.error("Dashboard fetch error:", err);
+          contenedor.innerHTML = `
+          <p style="color: var(--color-danger);">⚠️ Error de red</p>
+          <p style="font-size:0.9rem; color: var(--color-text-secondary);">No se pudo conectar con el servidor.</p>
+        `;
+        }
+      }
+
+      function cerrarSesion() {
+        localStorage.removeItem("simi_token");
+        window.location.href = "/";
+      }
+
+      // Cargar datos al iniciar
+      cargarDatos();
+    </script>
+  </body>
+</html>
