@@ -41,12 +41,11 @@ CREATE TABLE IF NOT EXISTS detalle_ventas (
 );
 
 -- ============================================
--- Datos iniciales
 -- Contraseña 'admin123' hasheada con bcrypt
 -- ============================================
 INSERT INTO usuarios (username, password, rol) VALUES 
-('admin', '$2b$10$rFqnHCTGMSjBhxLkZvJnCOQrjZMWJQ9xDGQnWCCXSKJBhqJJPiuUi', 'gerente_ti'),
-('operador', '$2b$10$rFqnHCTGMSjBhxLkZvJnCOQrjZMWJQ9xDGQnWCCXSKJBhqJJPiuUi', 'operador')
+('admin', '$2b$10$kH.R7i4ydDC9V1U4sHjh0ePAaCjwop9xpE5l.BKk7tMPA01Zo.o16', 'gerente_ti'),
+('operador', '$2b$10$kH.R7i4ydDC9V1U4sHjh0ePAaCjwop9xpE5l.BKk7tMPA01Zo.o16', 'operador')
 ON CONFLICT (username) DO NOTHING;
 
 -- Productos de ejemplo (farmacia SIMI)
