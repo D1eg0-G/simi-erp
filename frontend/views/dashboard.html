@@ -46,15 +46,23 @@
         const contenedor = document.getElementById("contenido-protegido");
 
         try {
-          const response = await fetch("/api/erp/datos", {
+          const response = await fetch("/api/erp/dashboard", {
             headers: { Authorization: `Bearer ${token}` },
           });
 
           if (response.ok) {
             const data = await response.json();
             contenedor.innerHTML = `
-            <p>✅ Conexión segura (token validado)</p>
-            <pre>${JSON.stringify(data, null, 2)}</pre>
+                <div class="info-card">
+                    <h3>✅ Sesión activa</h3>
+                    <p><strong>Usuario:</strong> ${data.usuario?.username || req.usuario?.username || "N/A"}</p>
+                    <p><strong>Rol:</strong> ${data.rol}</p>
+                    <p><strong>Acceso:</strong> ${data.timestamp}</p>
+                </div>
+                <div class="info-card">
+                    <h3>📦 Sistema ERP SIMI</h3>
+                    <p>${data.mensaje}</p>
+                </div>
           `;
           } else {
             // Si la sesión expiró o el token es inválido

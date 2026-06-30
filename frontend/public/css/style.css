@@ -317,3 +317,24 @@ pre::-webkit-scrollbar-thumb {
     justify-content: center;
   }
 }
+.info-card {
+  background: var(--color-card);
+  border: 1px solid #eef3fa;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+}
