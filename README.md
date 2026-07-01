@@ -19,13 +19,10 @@ Ver estructura completa en este repositorio.
 - JWT (autenticación)
 
 ## Cómo correr el proyecto
-1. Levantar la VPC y subredes (ver infra/vpc/)
+1. Levantar la VPC y subredes (ver infra/)
 2. Desplegar la base de datos (ver database/README.md)
 3. Desplegar el frontend (ver frontend/)
 4. Configurar ALB y ASG (ver infra/)
-
-## Documentación completa
-Ver carpeta `docs/` para el informe técnico-comercial completo.
 
 ## Video demostrativo
 [Link al video] (https://youtu.be/aTG6OyjZ3LA)
