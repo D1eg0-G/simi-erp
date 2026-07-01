@@ -28,4 +28,4 @@ Ver estructura completa en este repositorio.
 Ver carpeta `docs/` para el informe técnico-comercial completo.
 
 ## Video demostrativo
-[Link al video](LINK_AQUI)
+[Link al video] (https://youtu.be/aTG6OyjZ3LA)
